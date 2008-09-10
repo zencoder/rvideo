@@ -1,0 +1,11 @@
+Collection of transcoding edge cases and rules
+------------------------
+
+* mpeg4 output errors out if frame rate is not supplied
+  
+  [mpeg4 @ 0x149e810]timebase not supported by mpeg 4 standard
+  Error while opening codec for output stream #0.0 - maybe incorrect parameters such as bit_rate, rate, width or height
+  
+  Solution: provide a frame rate with -r (any frame rate will do)
+  
+  
