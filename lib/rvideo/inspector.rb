@@ -50,7 +50,7 @@ module RVideo # :nodoc:
         raise ArgumentError, "Must supply either an input file or a pregenerated response" if options[:raw_response].nil? and file.nil?
       end
 
-      metadata = /(Input \#.*)\nMust/m.match(@raw_response)
+      metadata = /(Input \#.*)\nAt/m.match(@raw_response)
       
       if /Unknown format/i.match(@raw_response) || metadata.nil?
         @unknown_format = true
