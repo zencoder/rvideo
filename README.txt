@@ -1,10 +1,7 @@
-= RVideo
-
-== DESCRIPTION:
+RVideo
 
 RVideo allows you to inspect and process video files.
 
-== INSTALL:
 
 Installation is a little involved. First, install the gem:
 
@@ -29,8 +26,6 @@ If you want to create Flash Video files, also install flvtool2:
   sudo gem install flvtool2
 
 Once ffmpeg and RVideo are installed, you're set. 
-
-== SYNOPSIS:
 
 To inspect a file, initialize an RVideo file inspector object. See the 
 documentation for details.
@@ -73,10 +68,6 @@ If the transcoding succeeds, the file may still have problems. RVideo
 will populate an errors array if the duration of the processed video
 differs from the duration of the original video, or if the processed
 file is unreadable.
-
-== FEATURES/PROBLEMS:
-
-== REQUIREMENTS:
 
 Thanks to Peter Boling for early work on RVideo.
 
