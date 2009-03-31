@@ -1,0 +1,12 @@
+# -*- ruby -*-
+
+require 'rubygems'
+require 'hoe'
+require './lib/rvideo.rb'
+
+Hoe.new('rvideo', Rvideo::VERSION) do |p|
+  # p.rubyforge_name = 'rvideox' # if different than lowercase project name
+  # p.developer('FIX', 'FIX@example.com')
+end
+
+# vim: syntax=Ruby
