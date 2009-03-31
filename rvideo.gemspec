@@ -15,8 +15,8 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/scottburton11/rvideo}
   s.rdoc_options = ["--inline-source", "--charset=UTF-8"]
   s.require_paths = ["lib"]
-  # s.rubyforge_project = %q{grit}
-  # s.rubygems_version = %q{1.3.0}
+  s.rubyforge_project = %q{rvideo}
+  s.rubygems_version = %q{1.3.0}
   s.summary = %q{RVideo allows you to inspect and process video files. This version has local modifications.}
 
   if s.respond_to? :specification_version then
