@@ -50,7 +50,7 @@ module RVideo # :nodoc:
         raise ArgumentError, "Must supply either an input file or a pregenerated response" if options[:raw_response].nil? and file.nil?
       end
 
-      metadata = /(Input \#.*)\nAt/m.match(@raw_response)
+      metadata = metadata_regexp.match(@raw_response)
       
       if /Unknown format/i.match(@raw_response) || metadata.nil?
         @unknown_format = true
@@ -130,6 +130,19 @@ module RVideo # :nodoc:
         true
       end
     end     
+    
+    #
+    # Returns a match regexp appropriate to the version of ffmpeg in use
+    # 
+    
+    def metadata_regexp
+      case ffmpeg_version
+      when "SVN-r18077"
+        /(Input \#.*)\nAt/m
+      else
+        /(Input \#.*)\nMust/m
+      end
+    end
     
     #
     # Take a screengrab of a movie. Requires an input file and a time parameter, and optionally takes an output filename. If no output filename is specfied, constructs one.
