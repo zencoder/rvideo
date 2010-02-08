@@ -136,12 +136,7 @@ module RVideo # :nodoc:
     # 
     
     def metadata_regexp
-      case ffmpeg_version
-      when "SVN-r18077"
-        /(Input \#.*)\nAt/m
-      else
-        /(Input \#.*)\nMust/m
-      end
+      /(Input \#.*)\nAt|Must/m
     end
     
     #
