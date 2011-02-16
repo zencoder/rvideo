@@ -393,6 +393,7 @@ module RVideo # :nodoc:
     
     def audio_channels
       return nil unless audio?
+      return audio_match[5].to_i if (audio_match[5].to_i > 0)
 
       case audio_match[5]
       when "mono"
@@ -523,7 +524,7 @@ module RVideo # :nodoc:
     def audio_match
       return nil unless valid?
       
-      /Stream\s*(.*?)[,|:|\(|\[].*?\s*Audio:\s*(.*?),\s*([0-9\.]*) (\w*),\s*([a-zA-Z:]*)/.match(audio_stream)
+      /Stream\s*(.*?)[,|:|\(|\[].*?\s*Audio:\s*(.*?),\s*([0-9\.]*) (\w*),\s*([(\d)*a-zA-Z:]*)/.match(audio_stream)
     end
 
     def video_match
