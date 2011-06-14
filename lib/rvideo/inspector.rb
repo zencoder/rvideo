@@ -46,6 +46,9 @@ module RVideo # :nodoc:
         @full_filename = file
         raise TranscoderError::InputFileNotFound, "File not found (#{file})" unless FileTest.exist?(file.gsub("\"",""))
         @raw_response = `#{@ffmpeg_binary} -i #{@full_filename} 2>&1`
+        if RUBY_VERSION >= "1.9.1"
+          @raw_response = @raw_response.force_encoding("ASCII-8Bit")
+        end
       else
         raise ArgumentError, "Must supply either an input file or a pregenerated response" if options[:raw_response].nil? and file.nil?
       end
@@ -136,7 +139,7 @@ module RVideo # :nodoc:
     # 
     
     def metadata_regexp
-      /(Input \#.*)\nAt|Must/m
+      /(Input \#.*)\n(At|Must)/m
     end
     
     #
