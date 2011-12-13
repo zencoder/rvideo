@@ -43,7 +43,7 @@ module RVideo # :nodoc:
         file = options[:file]
         @filename = File.basename(file)
         @path = File.dirname(file)
-        @full_filename = file
+        @full_filename = make_unix_safe(file)
         raise TranscoderError::InputFileNotFound, "File not found (#{file})" unless FileTest.exist?(file.gsub("\"",""))
         @raw_response = `#{@ffmpeg_binary} -i #{@full_filename} 2>&1`
       else
@@ -515,6 +515,10 @@ module RVideo # :nodoc:
     end
     
     private
+    
+    def make_unix_safe(path)
+      return path.gsub(/\s+/, "\\ ")
+    end
 
     def bitrate_match
       /bitrate: ([0-9\.]+)\s*(.*)\s+/.match(@raw_metadata)
