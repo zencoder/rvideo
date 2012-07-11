@@ -46,11 +46,14 @@ module RVideo # :nodoc:
         @full_filename = file
         raise TranscoderError::InputFileNotFound, "File not found (#{file})" unless FileTest.exist?(file.gsub("\"",""))
         @raw_response = `#{@ffmpeg_binary} -i #{@full_filename} 2>&1`
+        if RUBY_VERSION >= "1.9.1"
+          @raw_response = @raw_response.force_encoding("ASCII-8Bit")
+        end
       else
         raise ArgumentError, "Must supply either an input file or a pregenerated response" if options[:raw_response].nil? and file.nil?
       end
 
-      metadata = /(Input \#.*)\nMust/m.match(@raw_response)
+      metadata = metadata_regexp.match(@raw_response)
       
       if /Unknown format/i.match(@raw_response) || metadata.nil?
         @unknown_format = true
@@ -130,6 +133,14 @@ module RVideo # :nodoc:
         true
       end
     end     
+    
+    #
+    # Returns a match regexp appropriate to the version of ffmpeg in use
+    # 
+    
+    def metadata_regexp
+      /(Input \#.*)\n(At|Must)/m
+    end
     
     #
     # Take a screengrab of a movie. Requires an input file and a time parameter, and optionally takes an output filename. If no output filename is specfied, constructs one.
